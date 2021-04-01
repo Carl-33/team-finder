@@ -13,7 +13,7 @@ $(document).ready(function () {
         
         for (let i = 0; i < 31; i++) {
             let teamsList = $("<button>")
-            teamsList.text(teamsData.teams[i].name)
+            teamsList.text(teamsData.teams[i].franchise.teamName)
             teamsList.addClass("btn btn-outline-light team-button ")
             teamsList.attr("id", teamsData.teams[i].id)
             buttonsHere.append(teamsList)
@@ -40,6 +40,7 @@ $(document).ready(function () {
         $("#teamInfoBox").append(teamWebsite)
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
         $("#teamInfoBox").append(foundedYear)
+        // let conferenceAndDivision = 
     }
     function getTeamPlayers (teamId) {
         let playerQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId + "/roster";
