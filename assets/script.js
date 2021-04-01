@@ -40,7 +40,7 @@ $(document).ready(function () {
         $("#teamInfoBox").append(teamWebsite)
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
         $("#teamInfoBox").append(foundedYear)
-        let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].conference.name + " Conference " + teamInfoData.teams[0].division.name + " Division ")
+        let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].conference.name + " Conference - " + teamInfoData.teams[0].division.name + " Division ")
         $("#teamInfoBox").append(conferenceAndDivision)
     }
     function getTeamPlayers (teamId) {
