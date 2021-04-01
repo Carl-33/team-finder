@@ -40,7 +40,8 @@ $(document).ready(function () {
         $("#teamInfoBox").append(teamWebsite)
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
         $("#teamInfoBox").append(foundedYear)
-        // let conferenceAndDivision = 
+        let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].conference.name + " Conference " + teamInfoData.teams[0].division.name + " Division ")
+        $("#teamInfoBox").append(conferenceAndDivision)
     }
     function getTeamPlayers (teamId) {
         let playerQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId + "/roster";
@@ -71,7 +72,9 @@ $(document).ready(function () {
             console.log(playerInfo.roster[i].person.fullName)
             let playerStuff = $('<p>').text("Name: " + playerInfo.roster[i].person.fullName + 
                 " Number: " + playerInfo.roster[i].jerseyNumber + 
-                " Position: " +  playerInfo.roster[i].position.name)
+                " Position: " +  playerInfo.roster[i].position.name).attr({
+                    id: playerInfo.roster[i].person.id
+                }).addClass("PlayerCard")
             $('#teamInfoBox').append(playerStuff)
             // Table is not working yet
             // let playerName = $("<td>").text(playerInfo.roster[i].person.fullName)
