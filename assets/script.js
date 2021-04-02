@@ -31,8 +31,6 @@ $(document).ready(function () {
         }).then(displayTeamInfo)
     }
     function displayTeamInfo (teamInfoData) {
-        console.log("copyright: " + teamInfoData.copyright)
-        console.log("team info data " + teamInfoData.teams[0].name)
         let teamName = $("<h1>").text(teamInfoData.teams[0].name)
         let teamLogo = $("<img />", {
             src: `./assets/logos/${teamInfoData.teams[0].abbreviation}.png`,
