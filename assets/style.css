@@ -2,10 +2,11 @@
     text-align: center;
     width: 100%;
 }
-/* 
+
 .team-button {
-    max-width: 50px;
-} */
+    max-width: 3%;
+    padding:0.3%
+}
 .team-logo {
     max-width: 100px;
 }

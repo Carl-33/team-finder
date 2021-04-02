@@ -12,22 +12,16 @@ $(document).ready(function () {
     const buttonsHere = $("#teamButtonBox")
     getTeams();
     function displayTeams (teamsData) {
-        
         for (let i = 0; i < 31; i++) {
             // team logo images
-            // let teamsList = $("<img />", {  
-            //     src: `./assets/logos/${teamInfoData.teams[i].abbreviation}.png`,
-            //     id: teamInfoData.teams[i].id,
-            //     alt: `${teamInfoData.teams[i].name} Logo`,
-            //     class: "team-button"
-            // });
-            let teamsList = $("<button>")
-            teamsList.text(teamsData.teams[i].franchise.teamName)
-            teamsList.addClass("btn btn-outline-light team-button ")
-            teamsList.attr("id", teamsData.teams[i].id).addClass("team-button")
+            let teamsList = $("<img />", {  
+                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                id: teamsData.teams[i].id,
+                alt: `${teamsData.teams[i].name} Logo`,
+                class: "team-button"
+            });
             buttonsHere.append(teamsList)
         }
-
     }
     function getTeamInfo (teamId) {
         let teamQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId;
