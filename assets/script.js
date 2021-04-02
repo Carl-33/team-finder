@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     function getTeams() {
         console.log("hi")
@@ -12,10 +14,17 @@ $(document).ready(function () {
     function displayTeams (teamsData) {
         
         for (let i = 0; i < 31; i++) {
+            // team logo images
+            // let teamsList = $("<img />", {  
+            //     src: `./assets/logos/${teamInfoData.teams[i].abbreviation}.png`,
+            //     id: teamInfoData.teams[i].id,
+            //     alt: `${teamInfoData.teams[i].name} Logo`,
+            //     class: "team-button"
+            // });
             let teamsList = $("<button>")
             teamsList.text(teamsData.teams[i].franchise.teamName)
             teamsList.addClass("btn btn-outline-light team-button ")
-            teamsList.attr("id", teamsData.teams[i].id)
+            teamsList.attr("id", teamsData.teams[i].id).addClass("team-button")
             buttonsHere.append(teamsList)
         }
 
@@ -33,6 +42,13 @@ $(document).ready(function () {
         console.log("team info data " + teamInfoData.teams[0].name)
         let teamName = $("<h1>").text(teamInfoData.teams[0].name)
         $("#teamInfoBox").append(teamName)
+        let teamLogo = $("<img />", {
+            src: `./assets/logos/${teamInfoData.teams[0].abbreviation}.png`,
+            id: teamInfoData.teams[0].id,
+            alt: `${teamInfoData.teams[0].name} Logo`,
+            class: 'team-logo'
+        });
+        $("#teamInfoBox").append(teamLogo)
         let teamWebsite = $("<a>").text(teamInfoData.teams[0].officialSiteUrl).attr({
             href: teamInfoData.teams[0].officialSiteUrl, 
             target: "_blank"
@@ -51,7 +67,7 @@ $(document).ready(function () {
         }).then(displayPlayerInfo)  
     }
     function displayPlayerInfo (playerInfo) {
-        console.log(playerInfo)
+
         let rosterHeader = $("<h5>").text("Team Roster")
         $('#teamInfoBox').append(rosterHeader)
         // Table is not working yet
