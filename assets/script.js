@@ -31,27 +31,29 @@ $(document).ready(function () {
         }).then(displayTeamInfo)
     }
     function displayTeamInfo (teamInfoData) {
-        $("#teamInfoBox").empty();
         console.log("copyright: " + teamInfoData.copyright)
         console.log("team info data " + teamInfoData.teams[0].name)
         let teamName = $("<h1>").text(teamInfoData.teams[0].name)
-        $("#teamInfoBox").append(teamName)
         let teamLogo = $("<img />", {
             src: `./assets/logos/${teamInfoData.teams[0].abbreviation}.png`,
             id: teamInfoData.teams[0].id,
             alt: `${teamInfoData.teams[0].name} Logo`,
             class: 'team-logo'
         });
-        $("#teamInfoBox").append(teamLogo)
         let teamWebsite = $("<a>").text(teamInfoData.teams[0].officialSiteUrl).attr({
             href: teamInfoData.teams[0].officialSiteUrl, 
             target: "_blank"
         })
-        $("#teamInfoBox").append(teamWebsite)
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
-        $("#teamInfoBox").append(foundedYear)
         let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].conference.name + " Conference - " + teamInfoData.teams[0].division.name + " Division ")
+        let venue = $("<p>").text("Home Venue: " + teamInfoData.teams[0].venue.name)
+        $("#teamInfoBox").empty();
+        $("#teamInfoBox").append(teamLogo)
+        $("#teamInfoBox").append(teamName)
+        $("#teamInfoBox").append(teamWebsite)
+        $("#teamInfoBox").append(foundedYear)
         $("#teamInfoBox").append(conferenceAndDivision)
+        $("#teamInfoBox").append(venue)
     }
     function getTeamPlayers (teamId) {
         let playerQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId + "/roster";
@@ -61,10 +63,10 @@ $(document).ready(function () {
         }).then(displayPlayerInfo)  
     }
     function displayPlayerInfo (playerInfo) {
-
+        $("#playerInfoBox").empty();
         let rosterHeader = $("<h5>").text("Team Roster")
-        $('#teamInfoBox').append(rosterHeader)
-        // Table is not working yet
+        $('#playerInfoBox').append(rosterHeader)
+        // // Table is not working yet
         // let tableSpot = $("#tableHere")
         // let rosterTable = $("<table>").attr("id", "rosterTable")
         // let rosterTableRow = $("<tr>")
@@ -72,12 +74,12 @@ $(document).ready(function () {
         // let rosterHeaderNumber = $("<th>").text("Number")
         // let rosterHeaderPosition = $("<th>").text("Position")
         // let rosterTableRowEnd = $("</tr>")
-        // tableSpot.append(rosterTable)
-        // tableSpot.append(rosterTableRow)
-        // tableSpot.append(rosterHeaderName)
-        // tableSpot.append(rosterHeaderNumber)
-        // tableSpot.append(rosterHeaderPosition)
-        // tableSpot.append(rosterTableRowEnd)
+
+        // rosterTable.append(rosterTableRow)
+        // rosterTable.append(rosterHeaderName)
+        // rosterTable.append(rosterHeaderNumber)
+        // rosterTable.append(rosterHeaderPosition)
+        // rosterTable.append(rosterTableRowEnd)
         for (let i = 0; i < playerInfo.roster.length; i++) {
             console.log(playerInfo.roster[i].person.fullName)
             let playerStuff = $('<p>').text("Name: " + playerInfo.roster[i].person.fullName + 
@@ -85,18 +87,17 @@ $(document).ready(function () {
                 " Position: " +  playerInfo.roster[i].position.name).attr({
                     id: playerInfo.roster[i].person.id
                 }).addClass("PlayerCard")
-            $('#teamInfoBox').append(playerStuff)
+            $('#playerInfoBox').append(playerStuff)
             // Table is not working yet
             // let playerName = $("<td>").text(playerInfo.roster[i].person.fullName)
             // let playerNumber = $("<td>").text(playerInfo.roster[i].person.jerseyNumber)
             // let playerPosition = $("<td>").text(playerInfo.roster[i].position.name)
-            // tableSpot.append(rosterTableRow);
-            // tableSpot.append(playerName);
-            // tableSpot.append(playerNumber);
-            // tableSpot.append(playerPosition); 
-            // tableSpot.append(rosterTableRow);
+            // rosterTable.append(rosterTableRow);
+            // rosterTable.append(playerName);
+            // rosterTable.append(playerNumber);
+            // rosterTable.append(playerPosition); 
         }
-        // $("#tableHere").append(rosterTable)
+        tableSpot.append(rosterTable)
     }
     $(document).on("click", ".team-button", function() { 
         let teamId = $(this).attr('id');
