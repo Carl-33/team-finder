@@ -82,7 +82,7 @@ $(document).ready(function () {
             target: "_blank"
         })
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
-        let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].conference.name + " Conference - " + teamInfoData.teams[0].division.name + " Division ")
+        let conferenceAndDivision = $("<p>").text(teamInfoData.teams[0].division.name + " Division ")
         let venue = $("<p>").text("Home Venue: " + teamInfoData.teams[0].venue.name)
         $("#teamInfoBox").empty();
         $("#teamInfoBox").append(teamLogo)
