@@ -9,19 +9,58 @@ $(document).ready(function () {
             method: "GET"
         }).then(displayTeams);
     }
-    const buttonsHere = $("#teamButtonBox")
+    const buttonsOne = $("#teamButtonBoxOne")
+    const buttonsTwo = $("#teamButtonBoxTwo")
+    const buttonsThree = $("#teamButtonBoxThree")
+    const buttonsFour = $("#teamButtonBoxFour")
     getTeams();
     function displayTeams (teamsData) {
-        for (let i = 0; i < 31; i++) {
-            // team logo images
-            let teamsList = $("<img />", {  
+        // logo buttons on the header
+        for (let i = 0; i < teamsData.teams.length; i++) {
+        if (teamsData.teams[i].division.name === "MassMutual East") {
+            let eastList = $("<img />", {  
                 src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
                 id: teamsData.teams[i].id,
                 alt: `${teamsData.teams[i].name} Logo`,
                 class: "team-button"
             });
-            buttonsHere.append(teamsList)
+            buttonsOne.append(eastList)
+        } else if (teamsData.teams[i].division.name === "Scotia North") {
+            let northList = $("<img />", {  
+                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                id: teamsData.teams[i].id,
+                alt: `${teamsData.teams[i].name} Logo`,
+                class: "team-button"
+            });
+            buttonsTwo.append(northList)
+        } else if (teamsData.teams[i].division.name === "Discover Central") {
+            let centralList = $("<img />", {  
+                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                id: teamsData.teams[i].id,
+                alt: `${teamsData.teams[i].name} Logo`,
+                class: "team-button"
+            });
+            buttonsThree.append(centralList)
+        } else if (teamsData.teams[i].division.name === "Honda West") {
+            let westList = $("<img />", {  
+                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                id: teamsData.teams[i].id,
+                alt: `${teamsData.teams[i].name} Logo`,
+                class: "team-button"
+            });
+            buttonsFour.append(westList)
         }
+    }
+        // for (let i = 0; i < 31; i++) {
+        //     // team logo images
+        //     let teamsList = $("<img />", {  
+        //         src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+        //         id: teamsData.teams[i].id,
+        //         alt: `${teamsData.teams[i].name} Logo`,
+        //         class: "team-button"
+        //     });
+        //     buttonsHere.append(teamsList)
+        // }
     }
     function getTeamInfo (teamId) {
         let teamQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId;
