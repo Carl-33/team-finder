@@ -101,38 +101,47 @@ $(document).ready(function () {
     }
     function displayPlayerInfo (playerInfo) {
         $("#playerInfoBox").empty();
+        $("#tableHere").empty();
         let rosterHeader = $("<h5>").text("Team Roster")
         $('#playerInfoBox').append(rosterHeader)
-        // // Table is not working yet
-        // let tableSpot = $("#tableHere")
-        // let rosterTable = $("<table>").attr("id", "rosterTable")
+        // Table is not working yet
+        let tableSpot = $("#tableHere")
+        let rosterTable = $("<table>").attr("id", "rosterTable")
+        let rosterTableHeader = $("<thead>")
+        let rosterTableBody = $("<tbody>")
         // let rosterTableRow = $("<tr>")
-        // let rosterHeaderName = $("<th>").text("Name")
-        // let rosterHeaderNumber = $("<th>").text("Number")
-        // let rosterHeaderPosition = $("<th>").text("Position")
+        let rosterHeaderName = $("<th>").text("Name")
+        let rosterHeaderNumber = $("<th>").text("Number")
+        let rosterHeaderPosition = $("<th>").text("Position")
         // let rosterTableRowEnd = $("</tr>")
 
-        // rosterTable.append(rosterTableRow)
-        // rosterTable.append(rosterHeaderName)
-        // rosterTable.append(rosterHeaderNumber)
-        // rosterTable.append(rosterHeaderPosition)
-        // rosterTable.append(rosterTableRowEnd)
+        rosterTable.append(rosterTableHeader)
+        // rosterTableHeader.append(rosterTableRow)
+        rosterTableHeader.append(rosterHeaderName)
+        rosterTableHeader.append(rosterHeaderNumber)
+        rosterTableHeader.append(rosterHeaderPosition)
+        // rosterTableHeader.append(rosterTableRowEnd)
+        rosterTable.append(rosterTableBody)
         for (let i = 0; i < playerInfo.roster.length; i++) {
             console.log(playerInfo.roster[i].person.fullName)
-            let playerStuff = $('<p>').text("Name: " + playerInfo.roster[i].person.fullName + 
-                " Number: " + playerInfo.roster[i].jerseyNumber + 
-                " Position: " +  playerInfo.roster[i].position.name).attr({
-                    id: playerInfo.roster[i].person.id
-                }).addClass("PlayerCard")
-            $('#playerInfoBox').append(playerStuff)
+            // let playerStuff = $('<p>').text("Name: " + playerInfo.roster[i].person.fullName + 
+            //     " Number: " + playerInfo.roster[i].jerseyNumber + 
+            //     " Position: " +  playerInfo.roster[i].position.name).attr({
+            //         id: playerInfo.roster[i].person.id
+            //     }).addClass("PlayerCard")
+            // $('#playerInfoBox').append(playerStuff)
             // Table is not working yet
-            // let playerName = $("<td>").text(playerInfo.roster[i].person.fullName)
-            // let playerNumber = $("<td>").text(playerInfo.roster[i].person.jerseyNumber)
-            // let playerPosition = $("<td>").text(playerInfo.roster[i].position.name)
-            // rosterTable.append(rosterTableRow);
-            // rosterTable.append(playerName);
-            // rosterTable.append(playerNumber);
-            // rosterTable.append(playerPosition); 
+            let rosterTableRow = $("<tr>").attr("id", playerInfo.roster[i].person.fullName + " info")
+            let playerName = $("<td>").text(playerInfo.roster[i].person.fullName)
+            let playerNumber = $("<td>").text(playerInfo.roster[i].jerseyNumber)
+            let playerPosition = $("<td>").text(playerInfo.roster[i].position.name)
+            rosterTableBody.append(rosterTableRow);
+            rosterTableRow.append(playerName);
+            rosterTableRow.append(playerNumber);
+            rosterTableRow.append(playerPosition); 
+            // rosterTableBody.append(rosterTableRowEnd);
+            rosterTableBody.append(rosterTableRow)
+            
         }
         tableSpot.append(rosterTable)
     }
