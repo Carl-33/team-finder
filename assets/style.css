@@ -17,10 +17,3 @@ table {
 .numberCell, #numberHeader{
     text-align: center;
 }
-/* table, th, td {
-    border: 1px;
-    padding: 1px;
-    border-style: solid;
-    border-color: black;
-    border-collapse:collapse;
-} */

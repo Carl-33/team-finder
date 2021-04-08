@@ -7,13 +7,24 @@ $(document).ready(function () {
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(displayTeams);
+        }).then(displayTeams).then(displayPlaceHolder);
     }
     const buttonsOne = $("#teamButtonBoxOne")
     const buttonsTwo = $("#teamButtonBoxTwo")
     const buttonsThree = $("#teamButtonBoxThree")
     const buttonsFour = $("#teamButtonBoxFour")
     getTeams();
+    function displayPlaceHolder () {
+        $("#teamInfoBox").empty();
+        let NHLLogo = $("<img />", {
+            src: `./assets/logos/NHL.png`,
+            id: "NHL-Logo",
+            alt: `NHL Logo`,
+            class: 'team-logo'
+        });
+        $("#tableSpot").empty();
+        $("#teamInfoBox").append(NHLLogo)   
+    }
     function displayTeams (teamsData) {
         // logo buttons on the header
         for (let i = 0; i < teamsData.teams.length; i++) {
