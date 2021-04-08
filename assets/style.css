@@ -11,3 +11,16 @@
     max-width: 200px;
     max-height: 200px;
 }
+table {
+    width: 100%;
+}
+.numberCell, #numberHeader{
+    text-align: center;
+}
+/* table, th, td {
+    border: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: black;
+    border-collapse:collapse;
+} */
