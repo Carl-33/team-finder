@@ -65,16 +65,6 @@ $(document).ready(function () {
             buttonsFour.append(westList)
         }
     }
-        // for (let i = 0; i < 31; i++) {
-        //     // team logo images
-        //     let teamsList = $("<img />", {  
-        //         src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
-        //         id: teamsData.teams[i].id,
-        //         alt: `${teamsData.teams[i].name} Logo`,
-        //         class: "team-button"
-        //     });
-        //     buttonsHere.append(teamsList)
-        // }
     }
     function getTeamInfo (teamId) {
         let teamQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId;
@@ -122,7 +112,7 @@ $(document).ready(function () {
         let tableSpot = $("#tableHere")
         let rosterTable = $("<table>", {
             id: "rosterTable",
-            class: "table table-striped table-hover"
+            class: "table table-striped table-hover table-responsive"
         });
         let rosterTableHeader = $("<thead>")
         let rosterTableBody = $("<tbody>")
@@ -195,14 +185,9 @@ $(document).ready(function () {
             getPlayerStats(playerId);
             function displayStats (playerStats) {
                 console.log("array length: " + playerStats.stats[0].splits.length);
-                // let gamesText = ""; 
-                // let goalsText = "";
-                // let assistsText = "";   
-                    let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.games 
-                    let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" :playerStats.stats[0].splits[0].stat.goals
-                    let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.assists   
-
-                // }
+                let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.games 
+                let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" :playerStats.stats[0].splits[0].stat.goals
+                let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.assists  
                 let playerGames = $("<td>", {
                     class: "gamesCell",
                     text:  gamesText
@@ -210,12 +195,10 @@ $(document).ready(function () {
                 let playerGoals = $("<td>", {
                     class: "goalsCell",
                     text: goalsText
-                
                 })
                 let playerAssists = $("<td>", {
                     class: "assistsCell",
                     text: assistsText
-                
                 })
                 rosterTableRow.append(playerGames);
                 rosterTableRow.append(playerGoals);
