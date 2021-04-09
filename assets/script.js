@@ -141,10 +141,28 @@ $(document).ready(function () {
             class: "TableHeader",
             text: "Position"
         });
+        let rosterHeaderGames = $("<th>", {
+            id: "gamesHeader",
+            class: "TableHeader",
+            text: "Games"
+        });
+        let rosterHeaderGoals = $("<th>", {
+            id: "goalsHeader",
+            class: "TableHeader",
+            text: "Goals"
+        });
+        let rosterHeaderAssists = $("<th>", {
+            id: "assistsHeader",
+            class: "TableHeader",
+            text: "Assists"
+        });
         rosterTable.append(rosterTableHeader)
         rosterTableHeader.append(rosterHeaderName)
         rosterTableHeader.append(rosterHeaderNumber)
         rosterTableHeader.append(rosterHeaderPosition)
+        rosterTableHeader.append(rosterHeaderGames)
+        rosterTableHeader.append(rosterHeaderGoals)
+        rosterTableHeader.append(rosterHeaderAssists)
         rosterTable.append(rosterTableBody)
         for (let i = 0; i < playerInfo.roster.length; i++) {
             let playerId = playerInfo.roster[i].person.id
@@ -156,10 +174,7 @@ $(document).ready(function () {
                     method: "GET"
             }).then(displayStats)
         }
-        getPlayerStats(playerId);
-        function displayStats (playerStats) {
-            console.log("res " + playerStats.stats[0].splits[0].stat.timeOnIce)
-        }
+ 
             let rosterTableRow = $("<tr>").attr("id", playerInfo.roster[i].person.fullName + " info")
             let playerName = $("<td>", {
                 class: "nameCell",
@@ -169,7 +184,6 @@ $(document).ready(function () {
                 class: "numberCell",
                 text: playerInfo.roster[i].jerseyNumber 
             });
-            // .text(playerInfo.roster[i].jerseyNumber)
             let playerPosition = $("<td>", {
                 class: "positionCell",
                 text: playerInfo.roster[i].position.name 
@@ -178,11 +192,42 @@ $(document).ready(function () {
             rosterTableRow.append(playerName);
             rosterTableRow.append(playerNumber);
             rosterTableRow.append(playerPosition); 
+            getPlayerStats(playerId);
+            function displayStats (playerStats) {
+                console.log("array length: " + playerStats.stats[0].splits.length);
+                // let gamesText = ""; 
+                // let goalsText = "";
+                // let assistsText = "";   
+                    let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.games 
+                    let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" :playerStats.stats[0].splits[0].stat.goals
+                    let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.assists   
+
+                // }
+                let playerGames = $("<td>", {
+                    class: "gamesCell",
+                    text:  gamesText
+                });
+                let playerGoals = $("<td>", {
+                    class: "goalsCell",
+                    text: goalsText
+                
+                })
+                let playerAssists = $("<td>", {
+                    class: "assistsCell",
+                    text: assistsText
+                
+                })
+                rosterTableRow.append(playerGames);
+                rosterTableRow.append(playerGoals);
+                rosterTableRow.append(playerAssists);
+
+            }
             rosterTableBody.append(rosterTableRow)
             
-        }
+        
         tableSpot.append(rosterTable)
-    }
+        };
+    };
     $(document).on("click", ".team-button", function() { 
         let teamId = $(this).attr('id');
         let teamName = $(this).text()
