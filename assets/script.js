@@ -2,7 +2,6 @@
 
 $(document).ready(function () {
     function getTeams() {
-        console.log("hi")
         const queryURL = "https://statsapi.web.nhl.com/api/v1/teams/";
         $.ajax({
             url: queryURL,
@@ -14,19 +13,23 @@ $(document).ready(function () {
     const buttonsThree = $("#teamButtonBoxThree")
     const buttonsFour = $("#teamButtonBoxFour")
     getTeams();
-    function displayPlaceHolder () {
+    function displayPlaceHolder (teamsData) {
         $("#teamInfoBox").empty();
+        $("#tableHere").empty();
         let NHLLogo = $("<img />", {
             src: `./assets/logos/NHL.png`,
             id: "NHL-Logo",
             alt: `NHL Logo`,
             class: 'team-logo'
         });
-        $("#tableSpot").empty();
-        $("#teamInfoBox").append(NHLLogo)   
+        
+        $("#teamInfoBox").append(NHLLogo)
+        let placeHolderText = $("<h5>").text("Welcome to the Internet Hockey Database, click on a teams logo to see team and roster information.") 
+        $("#tableHere").append(placeHolderText)
     }
     function displayTeams (teamsData) {
         // logo buttons on the header
+        console.log(teamsData.copyright)
         for (let i = 0; i < teamsData.teams.length; i++) {
         if (teamsData.teams[i].division.name === "MassMutual East") {
             let eastList = $("<img />", {  
@@ -144,7 +147,19 @@ $(document).ready(function () {
         rosterTableHeader.append(rosterHeaderPosition)
         rosterTable.append(rosterTableBody)
         for (let i = 0; i < playerInfo.roster.length; i++) {
-            console.log(playerInfo.roster[i].person.fullName)
+            let playerId = playerInfo.roster[i].person.id
+            function getPlayerStats (playerId) {
+                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season=20202021"
+                console.log(`url: ${statsQuery}` )
+                $.ajax({
+                    url: statsQuery,
+                    method: "GET"
+            }).then(displayStats)
+        }
+        getPlayerStats(playerId);
+        function displayStats (playerStats) {
+            console.log("res " + playerStats.stats[0].splits[0].stat.timeOnIce)
+        }
             let rosterTableRow = $("<tr>").attr("id", playerInfo.roster[i].person.fullName + " info")
             let playerName = $("<td>", {
                 class: "nameCell",
