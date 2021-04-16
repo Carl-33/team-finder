@@ -184,10 +184,9 @@ $(document).ready(function () {
             rosterTableRow.append(playerPosition); 
             getPlayerStats(playerId);
             function displayStats (playerStats) {
-                console.log("array length: " + playerStats.stats[0].splits.length);
-                let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.games 
-                let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" :playerStats.stats[0].splits[0].stat.goals
-                let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : playerStats.stats[0].splits[0].stat.assists  
+                let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.games == undefined) ? "0" : playerStats.stats[0].splits[0].stat.games 
+                let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.goals == undefined) ? "0" : playerStats.stats[0].splits[0].stat.goals
+                let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.assists == undefined) ? "0" : playerStats.stats[0].splits[0].stat.assists  
                 let playerGames = $("<td>", {
                     class: "gamesCell",
                     text:  gamesText
