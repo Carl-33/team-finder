@@ -218,4 +218,7 @@ $(document).ready(function () {
         getTeamInfo(teamId);
         getTeamPlayers(teamId);
     })
+    $(document).on("click", ".header-text", function() {
+        displayPlaceHolder();
+    })
 })
