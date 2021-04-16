@@ -2,7 +2,14 @@
     text-align: center;
     width: 100%;
 }
-
+.hero-image {
+    background-image: url("../assets/backgrounds/rink.jpg");
+    /* height: 800px;
+    width: 100%;
+    margin-bottom: 25px;
+    background-size: cover;
+    background-position: center; */
+}
 .team-button {
     max-width: 12.5%;
     padding: 0.4%;
