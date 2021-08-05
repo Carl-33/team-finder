@@ -31,7 +31,7 @@ $(document).ready(function () {
         // logo buttons on the header
         console.log(teamsData.copyright)
         for (let i = 0; i < teamsData.teams.length; i++) {
-        if (teamsData.teams[i].division.name === "MassMutual East") {
+        if (teamsData.teams[i].division.name === "Metropolitan") {
             let eastList = $("<img />", {  
                 src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
                 id: teamsData.teams[i].id,
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 class: "team-button"
             });
             buttonsOne.append(eastList)
-        } else if (teamsData.teams[i].division.name === "Scotia North") {
+        } else if (teamsData.teams[i].division.name === "Atlantic") {
             let northList = $("<img />", {  
                 src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
                 id: teamsData.teams[i].id,
@@ -47,7 +47,7 @@ $(document).ready(function () {
                 class: "team-button"
             });
             buttonsTwo.append(northList)
-        } else if (teamsData.teams[i].division.name === "Discover Central") {
+        } else if (teamsData.teams[i].division.name === "Central") {
             let centralList = $("<img />", {  
                 src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
                 id: teamsData.teams[i].id,
@@ -55,7 +55,7 @@ $(document).ready(function () {
                 class: "team-button"
             });
             buttonsThree.append(centralList)
-        } else if (teamsData.teams[i].division.name === "Honda West") {
+        } else if (teamsData.teams[i].division.name === "Pacific") {
             let westList = $("<img />", {  
                 src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
                 id: teamsData.teams[i].id,
