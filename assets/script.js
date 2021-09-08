@@ -259,7 +259,7 @@ $(document).ready(function () {
 })
 
 
-   // function for changing the season... doesn't quite work yet.
+// function for changing the season... doesn't quite work yet.
 function seasonChange() {
     console.log("season change ran")
     // season = seasonDropdown.val();
