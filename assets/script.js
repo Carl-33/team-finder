@@ -157,7 +157,7 @@ $(document).ready(function () {
         for (let i = 0; i < playerInfo.roster.length; i++) {
             let playerId = playerInfo.roster[i].person.id
             function getPlayerStats (playerId) {
-                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season=20202021"
+                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season=20212022"
                 console.log(`url: ${statsQuery}` )
                 $.ajax({
                     url: statsQuery,
