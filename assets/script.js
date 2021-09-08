@@ -1,5 +1,4 @@
 
-
 $(document).ready(function () {
     function getTeams() {
         const queryURL = "https://statsapi.web.nhl.com/api/v1/teams/";
@@ -108,8 +107,52 @@ $(document).ready(function () {
         $("#tableHere").empty();
         let rosterHeader = $("<h5>").text("Team Roster")
         $('#tableHere').append(rosterHeader)
-        // Creating the Roster Table
+        // Creating a season dropdown menu
+    
+        let seasonLabel = $("<label>", {
+            text: "Choose a season: ",
+            for: "seasonMenu"
+        });
+        let seasonDropdown = $("<select>", {
+            name: "seasonMenu",
+            id: "seasonMenu"
+            // onchange: "seasonChange()"
+        });
+        let option1 = $("<option>", {
+            value: "20212022",
+            text: "2021/2022"
+        });
+        let option2 = $("<option>", {
+            value: "20202021",
+            text: "2020/2021"
+        });
+        let option3 = $("<option>", {
+            value: "20192020",
+            text: "2019/2020"
+        });
+        let option4 = $("<option>", {
+            value: "20182019",
+            text: "2018/2019"
+        });
         let tableSpot = $("#tableHere")
+        tableSpot.append(seasonLabel)
+        tableSpot.append(seasonDropdown)
+        seasonDropdown.append(option1)
+        seasonDropdown.append(option2)
+        seasonDropdown.append(option3)
+        seasonDropdown.append(option4)
+
+        let season = seasonDropdown.val()
+        // button.addEventListener("click", seasonChange);
+        function seasonChange() {
+            console.log("season change ran")
+            // season = seasonDropdown.val();
+            // console.log("new season: " + season)
+            // displayPlayerInfo(playerInfo)
+        }
+     
+        console.log ("season: " + season);
+        // Creating the Roster Table
         let rosterTable = $("<table>", {
             id: "rosterTable",
             class: "table table-striped table-hover table-responsive"
@@ -157,8 +200,8 @@ $(document).ready(function () {
         for (let i = 0; i < playerInfo.roster.length; i++) {
             let playerId = playerInfo.roster[i].person.id
             function getPlayerStats (playerId) {
-                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season=20212022"
-                console.log(`url: ${statsQuery}` )
+                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season="+season
+                // console.log(`url: ${statsQuery}` )
                 $.ajax({
                     url: statsQuery,
                     method: "GET"
