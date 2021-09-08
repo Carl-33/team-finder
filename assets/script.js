@@ -12,7 +12,7 @@ $(document).ready(function () {
     const buttonsThree = $("#teamButtonBoxThree")
     const buttonsFour = $("#teamButtonBoxFour")
     getTeams();
-    function displayPlaceHolder (teamsData) {
+    function displayPlaceHolder(teamsData) {
         $("#teamInfoBox").empty();
         $("#tableHere").empty();
         let NHLLogo = $("<img />", {
@@ -21,58 +21,58 @@ $(document).ready(function () {
             alt: `NHL Logo`,
             class: 'team-logo'
         });
-        
+
         $("#teamInfoBox").append(NHLLogo)
-        let placeHolderText = $("<h5>").text("Welcome to the Internet Hockey Database, click on a teams logo to see team and roster information.") 
+        let placeHolderText = $("<h5>").text("Welcome to the Internet Hockey Database, click on a teams logo to see team and roster information.")
         $("#tableHere").append(placeHolderText)
     }
-    function displayTeams (teamsData) {
+    function displayTeams(teamsData) {
         // logo buttons on the header
         console.log(teamsData.copyright)
         for (let i = 0; i < teamsData.teams.length; i++) {
-        if (teamsData.teams[i].division.name === "Metropolitan") {
-            let eastList = $("<img />", {  
-                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
-                id: teamsData.teams[i].id,
-                alt: `${teamsData.teams[i].name} Logo`,
-                class: "team-button"
-            });
-            buttonsOne.append(eastList)
-        } else if (teamsData.teams[i].division.name === "Atlantic") {
-            let northList = $("<img />", {  
-                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
-                id: teamsData.teams[i].id,
-                alt: `${teamsData.teams[i].name} Logo`,
-                class: "team-button"
-            });
-            buttonsTwo.append(northList)
-        } else if (teamsData.teams[i].division.name === "Central") {
-            let centralList = $("<img />", {  
-                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
-                id: teamsData.teams[i].id,
-                alt: `${teamsData.teams[i].name} Logo`,
-                class: "team-button"
-            });
-            buttonsThree.append(centralList)
-        } else if (teamsData.teams[i].division.name === "Pacific") {
-            let westList = $("<img />", {  
-                src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
-                id: teamsData.teams[i].id,
-                alt: `${teamsData.teams[i].name} Logo`,
-                class: "team-button"
-            });
-            buttonsFour.append(westList)
+            if (teamsData.teams[i].division.name === "Metropolitan") {
+                let eastList = $("<img />", {
+                    src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                    id: teamsData.teams[i].id,
+                    alt: `${teamsData.teams[i].name} Logo`,
+                    class: "team-button"
+                });
+                buttonsOne.append(eastList)
+            } else if (teamsData.teams[i].division.name === "Atlantic") {
+                let northList = $("<img />", {
+                    src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                    id: teamsData.teams[i].id,
+                    alt: `${teamsData.teams[i].name} Logo`,
+                    class: "team-button"
+                });
+                buttonsTwo.append(northList)
+            } else if (teamsData.teams[i].division.name === "Central") {
+                let centralList = $("<img />", {
+                    src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                    id: teamsData.teams[i].id,
+                    alt: `${teamsData.teams[i].name} Logo`,
+                    class: "team-button"
+                });
+                buttonsThree.append(centralList)
+            } else if (teamsData.teams[i].division.name === "Pacific") {
+                let westList = $("<img />", {
+                    src: `./assets/logos/${teamsData.teams[i].abbreviation}.png`,
+                    id: teamsData.teams[i].id,
+                    alt: `${teamsData.teams[i].name} Logo`,
+                    class: "team-button"
+                });
+                buttonsFour.append(westList)
+            }
         }
     }
-    }
-    function getTeamInfo (teamId) {
+    function getTeamInfo(teamId) {
         let teamQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId;
         $.ajax({
             url: teamQuery,
             method: "GET"
         }).then(displayTeamInfo)
     }
-    function displayTeamInfo (teamInfoData) {
+    function displayTeamInfo(teamInfoData) {
         let teamName = $("<h1>").text(teamInfoData.teams[0].name)
         let teamLogo = $("<img />", {
             src: `./assets/logos/${teamInfoData.teams[0].abbreviation}.png`,
@@ -81,7 +81,7 @@ $(document).ready(function () {
             class: 'team-logo'
         });
         let teamWebsite = $("<a>").text(teamInfoData.teams[0].officialSiteUrl).attr({
-            href: teamInfoData.teams[0].officialSiteUrl, 
+            href: teamInfoData.teams[0].officialSiteUrl,
             target: "_blank"
         })
         let foundedYear = $("<p>").text("Founded: " + teamInfoData.teams[0].firstYearOfPlay)
@@ -95,28 +95,27 @@ $(document).ready(function () {
         $("#teamInfoBox").append(conferenceAndDivision)
         $("#teamInfoBox").append(venue)
     }
-    function getTeamPlayers (teamId) {
+    function getTeamPlayers(teamId) {
         let playerQuery = "https://statsapi.web.nhl.com/api/v1/teams/" + teamId + "/roster";
         $.ajax({
             url: playerQuery,
             method: "GET"
-        }).then(displayPlayerInfo)  
+        }).then(displayPlayerInfo)
     }
-    function displayPlayerInfo (playerInfo) {
+    function displayPlayerInfo(playerInfo) {
         $("#playerInfoBox").empty();
         $("#tableHere").empty();
         let rosterHeader = $("<h5>").text("Team Roster")
         $('#tableHere').append(rosterHeader)
         // Creating a season dropdown menu
-    
         let seasonLabel = $("<label>", {
             text: "Choose a season: ",
             for: "seasonMenu"
         });
         let seasonDropdown = $("<select>", {
             name: "seasonMenu",
-            id: "seasonMenu"
-            // onchange: "seasonChange()"
+            id: "seasonMenu",
+            onChange: "seasonChange()"
         });
         let option1 = $("<option>", {
             value: "20212022",
@@ -143,15 +142,8 @@ $(document).ready(function () {
         seasonDropdown.append(option4)
 
         let season = seasonDropdown.val()
-        // button.addEventListener("click", seasonChange);
-        function seasonChange() {
-            console.log("season change ran")
-            // season = seasonDropdown.val();
-            // console.log("new season: " + season)
-            // displayPlayerInfo(playerInfo)
-        }
-     
-        console.log ("season: " + season);
+
+        console.log("season: " + season);
         // Creating the Roster Table
         let rosterTable = $("<table>", {
             id: "rosterTable",
@@ -199,15 +191,15 @@ $(document).ready(function () {
         rosterTable.append(rosterTableBody)
         for (let i = 0; i < playerInfo.roster.length; i++) {
             let playerId = playerInfo.roster[i].person.id
-            function getPlayerStats (playerId) {
-                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/"+playerId+"/stats?stats=statsSingleSeason&season="+season
+            function getPlayerStats(playerId) {
+                let statsQuery = "https://statsapi.web.nhl.com/api/v1/people/" + playerId + "/stats?stats=statsSingleSeason&season=" + season
                 // console.log(`url: ${statsQuery}` )
                 $.ajax({
                     url: statsQuery,
                     method: "GET"
-            }).then(displayStats)
-        }
- 
+                }).then(displayStats)
+            }
+
             let rosterTableRow = $("<tr>").attr("id", playerInfo.roster[i].person.fullName + " info")
             let playerName = $("<td>", {
                 class: "nameCell",
@@ -215,24 +207,24 @@ $(document).ready(function () {
             });
             let playerNumber = $("<td>", {
                 class: "numberCell",
-                text: playerInfo.roster[i].jerseyNumber 
+                text: playerInfo.roster[i].jerseyNumber
             });
             let playerPosition = $("<td>", {
                 class: "positionCell",
-                text: playerInfo.roster[i].position.name 
+                text: playerInfo.roster[i].position.name
             });
             rosterTableBody.append(rosterTableRow);
             rosterTableRow.append(playerName);
             rosterTableRow.append(playerNumber);
-            rosterTableRow.append(playerPosition); 
+            rosterTableRow.append(playerPosition);
             getPlayerStats(playerId);
-            function displayStats (playerStats) {
-                let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.games == undefined) ? "0" : playerStats.stats[0].splits[0].stat.games 
+            function displayStats(playerStats) {
+                let gamesText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.games == undefined) ? "0" : playerStats.stats[0].splits[0].stat.games
                 let goalsText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.goals == undefined) ? "0" : playerStats.stats[0].splits[0].stat.goals
-                let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.assists == undefined) ? "0" : playerStats.stats[0].splits[0].stat.assists  
+                let assistsText = (playerStats.stats[0].splits.length == 0) ? "0" : (playerStats.stats[0].splits[0].stat.assists == undefined) ? "0" : playerStats.stats[0].splits[0].stat.assists
                 let playerGames = $("<td>", {
                     class: "gamesCell",
-                    text:  gamesText
+                    text: gamesText
                 });
                 let playerGoals = $("<td>", {
                     class: "goalsCell",
@@ -248,12 +240,12 @@ $(document).ready(function () {
 
             }
             rosterTableBody.append(rosterTableRow)
-            
-        
-        tableSpot.append(rosterTable)
+
+
+            tableSpot.append(rosterTable)
         };
     };
-    $(document).on("click", ".team-button", function() { 
+    $(document).on("click", ".team-button", function () {
         let teamId = $(this).attr('id');
         let teamName = $(this).text()
         console.log(teamId);
@@ -261,7 +253,15 @@ $(document).ready(function () {
         getTeamInfo(teamId);
         getTeamPlayers(teamId);
     })
-    $(document).on("click", ".header-text", function() {
+    $(document).on("click", ".header-text", function () {
         displayPlaceHolder();
     })
 })
+
+
+   // function for changing the season... doesn't quite work yet.
+function seasonChange() {
+    console.log("season change ran")
+    // season = seasonDropdown.val();
+    // console.log("new season: " + season)
+}
